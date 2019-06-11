@@ -4,6 +4,8 @@ tools/*
 !tools/*.gitkeep
 analysis/*
 !analysis/*.gitkeep
+log/*
+!log/*.gitkeep
 
 #
 .hoge

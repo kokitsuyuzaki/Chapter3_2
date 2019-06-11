@@ -7,9 +7,9 @@
 マシンスペックは、Intel Xeon E5-2697 v2 (2.70 GHz) 、128GB RAM程度です
 
 # 準備
-- gitコマンド (>= version 1.8.3.1)
-- rakeコマンド (>= version 11.2.2)
-- R (>=vXX.XX.XX)
+- gitコマンド (>= v1.8.3.1)
+- rakeコマンド (>= v11.2.2)
+- R (>= v3.5.1)
 
 # 実行
 

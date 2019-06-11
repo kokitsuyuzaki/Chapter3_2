@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # SRX1847881 (MAQCA_1)

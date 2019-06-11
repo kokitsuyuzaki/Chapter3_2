@@ -1,14 +1,14 @@
 data/*
+!data/.gitkeep
 tools/*
+!tools/*.gitkeep
 analysis/*
-!.gitkeep
+!analysis/*.gitkeep
 
 #
 .hoge
 .hoge/*
 
-# CCIPCA specific
-src/ccipca
 #################
 ## Eclipse
 #################

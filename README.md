@@ -9,7 +9,7 @@
 # 準備
 - gitコマンド (>= version 1.8.3.1)
 - rakeコマンド (>= version 11.2.2)
-- GNU timeコマンド（>=1.7）
+- R (>=vXX.XX.XX)
 
 # 実行
 

@@ -9,6 +9,7 @@ task :install do
 	# テストデータダウンロード、解凍（SRP076615）
 	sh "src/download_data.sh"
 	sh "src/unzip_data.sh"
+
 	# Salmonのダウンロード、インストール（v0.14.0）
 	sh "wget https://github.com/COMBINE-lab/salmon/releases/download/v0.14.0/salmon-0.14.0_linux_x86_64.tar.gz -P tools && tar -zxvf tools/salmon-0.14.0_linux_x86_64.tar.gz -C tools"
 	# Kallistoのダウンロード、インストール（v0.45.1）
@@ -17,8 +18,6 @@ task :install do
 	sh "wget https://github.com/COMBINE-lab/RapMap/releases/download/v0.6.0/RapMap-0.6.0_linux_x86_64.tar.gz -P tools && tar -zxvf tools/RapMap-0.6.0_linux_x86_64.tar.gz -C tools"
 	# STARのダウンロード、インストール（v2.7.1a）
 	sh "wget https://github.com/alexdobin/STAR/archive/2.7.1a.tar.gz -P tools && tar -zxvf tools/2.7.1a.tar.gz -C tools && cd tools/STAR-2.7.1a/source && make STAR"
-	# samtoolsのダウンロード、インストール（v1.9）
-	sh "wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2 -P tools && tar -jxvf tools/samtools-1.9.tar.bz2 -C tools && cd tools/samtools-1.9 && ./configure --prefix=/usr/local/ && make -j 8"
 end
 
 desc "SalmonでTranscript-levelの発現量を定量化"
@@ -39,11 +38,6 @@ desc "STARでトランスクリプトームにマッピング"
 task :rapmap do
 	sh "src/rapmap_index.sh"
 	sh "src/rapmap_mapping.sh"
-end
-
-desc "SAM → BAM変換"
-task :sam2bam do
-	sh "src/sam2bam.sh"
 end
 
 desc "STARでゲノムにマッピング"

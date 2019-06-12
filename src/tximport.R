@@ -1,7 +1,7 @@
 ################################################################
 # パッケージダウンロード
 ################################################################
-install.packages("BiocManger", repos="http://cran.r-project.org")
+install.packages("BiocManager", repos="http://cran.r-project.org")
 BiocManager::install("tximport", suppressUpdates=TRUE)
 BiocManager::install("Homo.sapiens", suppressUpdates=TRUE)
 

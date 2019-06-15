@@ -4,7 +4,7 @@
 # 計算環境
 このパイプラインは、CentOS Linux release 7.2.1511 (Core)上で実行されました
 
-マシンスペックは、Intel Xeon E5-2697 v2 (2.70 GHz) 、128GB RAM程度です
+マシンスペックは、Intel Xeon E5-2697 v2 (2.70 GHz) 、128GB RAMです
 
 # 準備
 - gitコマンド (>= v1.8.3.1)
@@ -22,5 +22,6 @@ rake kallisto # Kallistoの実行
 rake rapmap # RapMapの実行
 rake sam2bam # Sam2bamの実行
 rake star # STAR実行
+rake hisat2 # HISAR2実行
 rake tximport # tximportの実行
 ````

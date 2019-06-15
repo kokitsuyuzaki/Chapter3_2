@@ -14,10 +14,12 @@ task :install do
 	sh "wget https://github.com/COMBINE-lab/salmon/releases/download/v0.14.0/salmon-0.14.0_linux_x86_64.tar.gz -P tools && tar -zxvf tools/salmon-0.14.0_linux_x86_64.tar.gz -C tools"
 	# Kallistoのダウンロード、インストール（v0.45.1）
 	sh "wget https://github.com/pachterlab/kallisto/releases/download/v0.45.1/kallisto_linux-v0.45.1.tar.gz -P tools && tar -zxvf tools/kallisto_linux-v0.45.1.tar.gz -C tools"
-	# RapMapのダウンロード、インストール（v0.6.0）
-	sh "wget https://github.com/COMBINE-lab/RapMap/releases/download/v0.6.0/RapMap-0.6.0_linux_x86_64.tar.gz -P tools && tar -zxvf tools/RapMap-0.6.0_linux_x86_64.tar.gz -C tools"
 	# STARのダウンロード、インストール（v2.7.1a）
 	sh "wget https://github.com/alexdobin/STAR/archive/2.7.1a.tar.gz -P tools && tar -zxvf tools/2.7.1a.tar.gz -C tools && cd tools/STAR-2.7.1a/source && make STAR"
+	# HISAT2のダウンロード、インストール（v2.1.0）
+	sh "wget http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip -P tools
+	&& unzip tools/hisat2-2.1.0-Linux_x86_64.zip -d tools"
+
 end
 
 desc "SalmonでTranscript-levelの発現量を定量化"
@@ -34,16 +36,16 @@ task :kallisto do
 	sh "src/kallisto_quant_options.sh"
 end
 
-desc "STARでトランスクリプトームにマッピング"
-task :rapmap do
-	sh "src/rapmap_index.sh"
-	sh "src/rapmap_mapping.sh"
-end
-
 desc "STARでゲノムにマッピング"
 task :star do
 	sh "src/star_index.sh"
 	sh "src/star_mapping.sh"
+end
+
+desc "HISAT2でゲノムにマッピング"
+task :hisat2 do
+	sh "src/hisat2_index.sh"
+	sh "src/hisat2_mapping.sh"
 end
 
 desc "tximportでGene-levelの発現量に要約"

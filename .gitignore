@@ -16,8 +16,8 @@ analysis/kallisto_options/*
 !analysis/kallisto_options/.gitkeep
 analysis/star/*
 !analysis/star/.gitkeep
-analysis/rapmap/*
-!analysis/rapmap/.gitkeep
+analysis/hisat2/*
+!analysis/hisat2/.gitkeep
 analysis/tximport/*
 !analysis/tximport/.gitkeep
 

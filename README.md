@@ -19,7 +19,6 @@ cd Chapter3_2
 rake install # データ・ツールのインストール
 rake salmon # Salmonの実行
 rake kallisto # Kallistoの実行
-rake rapmap # RapMapの実行
 rake sam2bam # Sam2bamの実行
 rake star # STAR実行
 rake hisat2 # HISAR2実行

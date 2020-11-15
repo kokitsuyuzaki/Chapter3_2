@@ -1,13 +1,12 @@
 #!/bin/bash
 
-srrs=({77..92})
+INDEX=`echo $1 | sed -e "s|.8.ht2||g"`
 
-for srr in ${srrs[@]}; do
-	mkdir -p analysis/hisat2/SRR36709${srr}
-	/usr/bin/time -v \
-	tools/hisat2-2.1.0/hisat2 \
-	-x data/genome_index_hisat2 \
-	-U data/SRR36709${srr}.fastq \
-	-p 4 \
-	-S analysis/hisat2/SRR36709${srr}/output.sam >& log/hisat2_mapping_SRR36709${srr}.log
-done
+echo $3/output.sam
+ls $3/output.sam
+
+hisat2 \
+-x $INDEX \
+-U $2 \
+-p 4 \
+-S $3

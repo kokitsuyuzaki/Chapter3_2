@@ -7,20 +7,12 @@
 マシンスペックは、Intel Xeon E5-2697 v2 (2.70 GHz) 、128GB RAMです
 
 # 準備
-- gitコマンド (>= v1.8.3.1)
-- rakeコマンド (>= v11.2.2)
-- R (>= v3.5.1)
+- Snakemake: 
+- Docker: 
+- Singularity: 
 
 # 実行
 
 ```bash
-git clone https://github.com/kokitsuyuzaki/Chapter3_2/
-cd Chapter3_2
-rake install # データ・ツールのインストール
-rake salmon # Salmonの実行
-rake kallisto # Kallistoの実行
-rake sam2bam # Sam2bamの実行
-rake star # STAR実行
-rake hisat2 # HISAR2実行
-rake tximport # tximportの実行
+snakemake -j 4 --use-singularity
 ````

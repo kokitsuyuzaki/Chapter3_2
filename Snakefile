@@ -200,7 +200,7 @@ rule hisat2_mapping:
 
 rule tximport:
 	input:
-		expand("output/salmon/{sample}/quant.sf",
+		expand("output/{salmon}/{sample}/quant.sf",
 			sample=SAMPLEs,
 			salmon=['salmon', 'salmon_options']),
 		expand("output/{kallisto}/{sample}/abundance.h5",

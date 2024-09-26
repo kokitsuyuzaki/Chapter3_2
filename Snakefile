@@ -10,8 +10,10 @@ rule all:
 
 rule download_ref_transcriptome:
 	output:
-		touch("data/gencode.v35.transcripts.fa.gz"),
-		touch("data/gencode.v35.transcripts.fa")
+		"data/gencode.v46.transcripts.fa.gz",
+		"data/gencode.v46.transcripts.fa"
+	resources:
+		mem_mb=1000000
 	benchmark:
 		"benchmarks/download_ref_transcriptome.txt"
 	log:
@@ -21,8 +23,10 @@ rule download_ref_transcriptome:
 
 rule download_ref_genome_human:
 	output:
-		touch("data/GRCh38.p13.genome.fa.gz"),
-		touch("data/GRCh38.p13.genome.fa")
+		"data/GRCh38.p14.genome.fa.gz",
+		"data/GRCh38.p14.genome.fa"
+	resources:
+		mem_mb=1000000
 	benchmark:
 		"benchmarks/download_ref_genome.txt"
 	log:
@@ -32,7 +36,9 @@ rule download_ref_genome_human:
 
 rule download_fastq:
 	output:
-		touch("data/{sample}.fastq.gz")
+		"data/{sample}.fastq.gz"
+	resources:
+		mem_mb=1000000
 	benchmark:
 		"benchmarks/download_fastq_{sample}.txt"
 	log:
@@ -44,7 +50,9 @@ rule unzip_fastq:
 	input:
 		"data/{sample}.fastq.gz"
 	output:
-		touch("data/{sample}.fastq")
+		"data/{sample}.fastq"
+	resources:
+		mem_mb=1000000
 	benchmark:
 		"benchmarks/unzip_fastq_{sample}.txt"
 	log:
@@ -54,11 +62,13 @@ rule unzip_fastq:
 
 rule salmon_index:
 	input:
-		"data/gencode.v35.transcripts.fa.gz"
+		"data/gencode.v46.transcripts.fa.gz"
 	output:
-		touch("data/transcripts_index_salmon/info.json")
+		"data/transcripts_index_salmon/info.json"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/salmon:1.3.0--hf69c8f4_0"
+		"docker://quay.io/biocontainers/salmon:1.10.3--hb7e2ac5_1"
 	benchmark:
 		"benchmarks/salmon_index.txt"
 	log:
@@ -71,9 +81,11 @@ rule salmon_quant:
 		"data/transcripts_index_salmon/info.json",
 		"data/{sample}.fastq.gz"
 	output:
-		touch("output/salmon/{sample}/quant.sf")
+		"output/salmon/{sample}/quant.sf"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/salmon:1.3.0--hf69c8f4_0"
+		"docker://quay.io/biocontainers/salmon:1.10.3--hb7e2ac5_1"
 	benchmark:
 		"benchmarks/salmon_quant_{sample}.txt"
 	log:
@@ -86,9 +98,11 @@ rule salmon_quant_options:
 		"data/transcripts_index_salmon/info.json",
 		"data/{sample}.fastq.gz"
 	output:
-		touch("output/salmon_options/{sample}/quant.sf")
+		"output/salmon_options/{sample}/quant.sf"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/salmon:1.3.0--hf69c8f4_0"
+		"docker://quay.io/biocontainers/salmon:1.10.3--hb7e2ac5_1"
 	benchmark:
 		"benchmarks/salmon_quant_options_{sample}.txt"
 	log:
@@ -98,9 +112,11 @@ rule salmon_quant_options:
 
 rule kallisto_index:
 	input:
-		"data/gencode.v35.transcripts.fa.gz"
+		"data/gencode.v46.transcripts.fa.gz"
 	output:
-		touch("data/transcripts_index_kallisto")
+		"data/transcripts_index_kallisto"
+	resources:
+		mem_mb=1000000
 	container:
 		"docker://quay.io/biocontainers/kallisto:0.46.2--h4f7b962_1"
 	benchmark:
@@ -115,7 +131,9 @@ rule kallisto_quant:
 		"data/transcripts_index_kallisto",
 		"data/{sample}.fastq.gz"
 	output:
-		touch("output/kallisto/{sample}/abundance.h5")
+		"output/kallisto/{sample}/abundance.h5"
+	resources:
+		mem_mb=1000000
 	container:
 		"docker://quay.io/biocontainers/kallisto:0.46.2--h4f7b962_1"
 	benchmark:
@@ -130,7 +148,9 @@ rule kallisto_quant_options:
 		"data/transcripts_index_kallisto",
 		"data/{sample}.fastq.gz"
 	output:
-		touch("output/kallisto_options/{sample}/abundance.h5")
+		"output/kallisto_options/{sample}/abundance.h5"
+	resources:
+		mem_mb=1000000
 	container:
 		"docker://quay.io/biocontainers/kallisto:0.46.2--h4f7b962_1"
 	benchmark:
@@ -142,11 +162,13 @@ rule kallisto_quant_options:
 
 rule star_index:
 	input:
-		"data/GRCh38.p13.genome.fa"
+		"data/GRCh38.p14.genome.fa"
 	output:
-		touch("data/genome_index_star/Log.out")
+		"data/genome_index_star/Log.out"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/star:2.7.6a--0"
+		"docker://quay.io/biocontainers/star:2.7.11b--h43eeafb_2"
 	benchmark:
 		"benchmarks/star_index.txt"
 	log:
@@ -160,8 +182,10 @@ rule star_mapping:
 		"data/{sample}.fastq"
 	output:
 		"output/star/{sample}/Aligned.out.sam"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/star:2.7.6a--0"
+		"docker://quay.io/biocontainers/star:2.7.11b--h43eeafb_2"
 	benchmark:
 		"benchmarks/star_mapping_{sample}.txt"
 	log:
@@ -171,11 +195,13 @@ rule star_mapping:
 
 rule hisat2_index:
 	input:
-		"data/GRCh38.p13.genome.fa"
+		"data/GRCh38.p14.genome.fa"
 	output:
-		touch("data/genome_index_hisat2.8.ht2")
+		"data/genome_index_hisat2.8.ht2"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/hisat2:2.2.1--he1b5a44_2"
+		"docker://quay.io/biocontainers/hisat2:2.2.1--h87f3376_5"
 	benchmark:
 		"benchmarks/hisat2_index.txt"
 	log:
@@ -189,8 +215,10 @@ rule hisat2_mapping:
 		"data/{sample}.fastq"
 	output:
 		"output/hisat2/{sample}/output.sam"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://quay.io/biocontainers/hisat2:2.2.1--he1b5a44_2"
+		"docker://quay.io/biocontainers/hisat2:2.2.1--h87f3376_5"
 	benchmark:
 		"benchmarks/hisat2_mapping_{sample}.txt"
 	log:
@@ -208,8 +236,10 @@ rule tximport:
 			kallisto=['kallisto', 'kallisto_options'])
 	output:
 		"output/tximport/tximport.RData"
+	resources:
+		mem_mb=1000000
 	container:
-		"docker://koki/chapter3_2:latest"
+		"docker://koki/chapter3_2:20240925"
 	benchmark:
 		"benchmarks/tximport.txt"
 	log:

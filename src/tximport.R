@@ -69,7 +69,6 @@ rownames(txi.kallisto_options$abundance) <- tx2gene_kallisto$TXNAME
 rownames(txi.kallisto_options$counts) <- tx2gene_kallisto$TXNAME
 rownames(txi.kallisto_options$length) <- tx2gene_kallisto$TXNAME
 
-
 # Countテーブル
 head(txi.salmon$counts)
 head(txi.salmon_options$counts)
